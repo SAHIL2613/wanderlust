@@ -6,10 +6,10 @@ const app=express();
 const mongoose=require("mongoose");
 const path=require("path");
 const methodoverride=require("method-override");
-const ejsMate=require("ejs-Mate");//helps to create many templates eg navbar
+const ejsMate=require("ejs-mate");//helps to create many templates eg navbar
 const expressError=require("./utils/expressError.js");
 const session=require("express-session");
-const MongoStore=require("connect-mongo")
+const MongoStore=require("connect-mongo").default;
 const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
@@ -53,12 +53,12 @@ async function main(){
    await mongoose.connect(dbUrl);
 }
 
-const store=MongoStore.createKrupteinAdapter({
-  mongoUrl:dbUrl,
-  crypto:{
-    secret:"mysecretcode"
+const store = new MongoStore({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.SESSION_SECRET || "mySuperSecretKey12345",
   },
-  touchAfter:24*3600,
+  touchAfter: 24 * 3600,
 });
 
 store.on("error",()=>{
@@ -67,9 +67,9 @@ store.on("error",()=>{
 
 const sessionOptions={
   store,
-  secret:"mysecretcode",
+ secret:process.env.SESSION_SECRET || "mySuperSecretKey12345",
   resave:false,
-  saveUninitialized:true,
+  saveUninitialized:false,
   cookie:{
     expires:Date.now() +7 * 24 * 60 * 60 * 1000,
     maxAge:7 * 24 * 60 * 60 * 1000,
