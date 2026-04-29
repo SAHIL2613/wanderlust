@@ -1,0 +1,85 @@
+<% layout("/layouts/boilerplate")%>
+<body>
+  <div class="row mt-3">
+    <div class=" col col-8 offset-2">
+
+
+  <h3 >Edit your Listing</h3>
+  <form method="POST" 
+  novalidate class="needs-validation"
+   action="/listing/<%=listing._id%>?_method=PUT"
+   enctype="multipart/form-data">
+
+
+    <div>
+    <label for="title" class="form-label" >Title</label>
+    <input name="listing[title]"
+     value="<%=listing.title%>"
+    type="text" class="form-control" required>
+    <div class="valid-feedback">Looks nice</div>
+    <div class="invalid-feedback">Enter title</div>
+    </div>
+
+    <br>
+
+    <div>
+    <label for="description" class="form-label" >Description</label>
+    <textarea name="listing[description]" class="form-control"required>
+    <%=listing.description%>
+    </textarea>
+    <div class="invalid-feedback">Please enter a short description </div>
+    </div>
+
+    <br>
+
+    <div class="mb-3">
+      <img src="<%=orignalImageUrl%>"
+           class="img-fluid rounded"
+           alt="Listing Image"
+           style="max-height:200px">
+    </div>
+
+    <div>
+    <label for="image" class="form-label" >Upload Your Image </label>
+    <input name="listing[image]"
+     type="file" class="form-control" >
+     </div>
+
+    <br>
+   <div class="mb-3 col-md-4">
+    <label for="price" class="form-label" >Price</label>
+    <input name="listing[price]"
+     value="<%=listing.price%>"  
+     type="number" class="form-control" required>
+     <div class="invalid-feedback">Enter a valid amout</div>
+    </div>
+   
+
+    <br>
+    <div class="row">
+    <div class="mb-3 col-8">
+    <label for="country" class="form-label" >Countary</label>
+    <input name="listing[country]" 
+    value="<%=listing.country%>" 
+    type="text" class="form-control" required>
+    </div>
+    
+
+    <br>
+
+    <div>
+    <label for="location" class="form-label" >Location</label>
+    <input name="listing[location]"
+     value="<%=listing.location%>"
+     type="text" class="form-control" required>
+     </div>
+     </div>
+    
+     <br>
+
+     <button class="btn btn-dark add-btn">edit</button>
+  </form>
+   </div>
+  </div>
+
+</body>
