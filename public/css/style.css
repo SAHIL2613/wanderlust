@@ -112,6 +112,21 @@ min-height:100vh;
 /* map */
 
 #map {
-  height:400px;
-  width:80vh;
+  width: 100%;
+  height: 400px;
+  border-radius: 1rem;
  }
+ 
+ /* For tablets and phones */
+@media (max-width: 768px) {
+  #map {
+    height: 300px;
+  }
+}
+
+/* For very small phones */
+@media (max-width: 480px) {
+  #map {
+    height: 250px;
+  }
+}
