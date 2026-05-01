@@ -109,6 +109,11 @@ next();
 //after flash
 app.use("/listing", listingRouter);
 app.use("/listing/:id/reviews",reviewRouter);
+
+app.get("/", (req, res) => {
+  res.redirect("/listing");
+});
+
 app.use("/",userRouter);
 
 
